@@ -1,1 +1,1 @@
-# State-Population
+This program is used to look through data and provide the user with the population depending on the state. The code provides which states it has information about at the beginning, so if the user enters a state that is not mentioned, it will return with an error code and let the user try again if they would like.
