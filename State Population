@@ -1,0 +1,61 @@
+#use dictionary to determine state population
+
+#imputted dictionary of population data (in millions)
+popData = {
+    'CA': 39.5, 'TX': 30.0, 'FL': 22.2, 'NY': 19.8,
+    'PA': 13.0, 'IL': 12.8, 'OH': 11.8, 'GA': 10.9,
+    'NC': 10.7, 'MI': 10.1
+}
+
+#define function to retrieve population
+def retrieve_pop(region_code, data_dict):
+    if region_code in data_dict:        #check if the key exists
+        return data_dict[region_code]   #return population
+    else:
+        return None                     #return None if not found
+
+
+#main function
+def main():
+    #create a list of all valid codes
+    valid_codes = list(popData.keys())
+
+    #create infinite loop for retry
+    while True:
+        #ask user for a country/state code
+        code = input("Please enter a country code: ")
+
+        #removing whitespace and converting to uppercase
+        code = code.strip().upper()
+
+        #retrieve population using the function
+        population = retrieve_pop(code, popData)
+
+        #if code is valid, show result and end loop
+        if population is not None:
+            print(f"{code} population = {population}")
+            break
+        else:
+            #error and valid codes
+            print(f"Error: '{code}' not recognized. Valid codes: {', '.join(valid_codes)}")
+
+            #ask user if they want to try again
+            retry = input("Would you like to try again? (yes/no): ")
+            retry = retry.strip().lower()
+
+            #if no, exit program
+            if retry == "no" or retry == "n":
+                print("Program terminated.")
+                break
+            #if yes, continue loop
+            elif retry == "yes" or retry == "y":
+                continue
+            else:
+                #invalid response ends the program
+                print("Invalid response. Program terminated.")
+                break
+
+
+#run the program
+if __name__ == "__main__":
+    main()
